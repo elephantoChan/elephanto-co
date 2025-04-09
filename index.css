@@ -10,20 +10,23 @@ html, body {
     display: flex;
     height: 100%;
 }
-#toggle-filters {
-    padding: 0.65rem 0.9rem;
+.filter-button {
     border: none;
-    background: #fff;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
+    padding: 0.65rem 0.9rem;
+    border-radius: 0.4rem;
     font-size: 1.1rem;
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
 }
-
+.filter-button :hover {
+    background:#ddd;
+}
 .sidebar {
     width: 220px;
     padding: 1.5rem 1rem;
     color: black;
+    background:white;
     display: none;
     flex-direction: column;
 }
@@ -66,6 +69,9 @@ html, body {
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+.search-box input::placeholder {
+    color: #444;
 }
 .results {
     width: 100%;
@@ -153,14 +159,6 @@ html, body {
     border-top: 1px solid #ccc;
     box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.05);
 }
-.footer a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.footer a:hover {
-    text-decoration: underline;
-}
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -188,12 +186,10 @@ html, body {
     border-bottom: 1px solid #ddd;
     z-index: 100;
 }
-
 .top-links {
     display: flex;
     gap: 0.5rem;
 }
-
 .top-btn {
     background: #eee;
     border: none;
@@ -203,9 +199,7 @@ html, body {
     text-decoration: none;
     color: #333;
     cursor: pointer;
-    transition: background 0.2s;
 }
-
 .top-btn:hover {
     background: #ddd;
 }
@@ -213,30 +207,34 @@ body.dark {
     background: #121212;
     color: #eee;
 }
-
 body.dark .top-bar {
     background: #1e1e1e;
     border-bottom: 1px solid #333;
 }
-
 body.dark .top-btn {
     background: #2a2a2a;
     color: #eee;
 }
-
 body.dark .top-btn:hover {
     background: #444;
 }
-
 body.dark .footer {
     background: #1e1e1e;
     color: #aaa;
     border-top: 1px solid #333;
 }
 body.dark .sidebar {
-    color: white
+    color: white;
+    background: #121212;
 }
-body.dark #toggle-filters {
+body.dark .search-box input {
+    border: 1px solid #2a2a2a;
+    background: #2a2a2a;
+}
+body.dark .search-box input::placeholder {
+    color:#ccc
+}
+body.dark .filter-button {
     background: #2a2a2a;
     color: #eee;
 }
