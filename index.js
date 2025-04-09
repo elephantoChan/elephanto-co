@@ -6,7 +6,7 @@ const toggleButton = document.getElementById("toggle-filters");
 
 let currentFilter = "weapons";
 let dataCache = {};
-
+document.body.classList.toggle("dark");
 filters.forEach((radio) => {
     radio.addEventListener("change", () => {
         currentFilter = radio.value;
@@ -26,9 +26,10 @@ async function loadDataAndSearch() {
     const query = input.value.trim().toLowerCase();
     if (query === "") {
         results.innerHTML = "";
+        results.classList.add("hidden");
         return;
     }
-
+    results.classList.remove("hidden");
     const file = `json/${currentFilter}.json`;
 
     if (!dataCache[currentFilter]) {
