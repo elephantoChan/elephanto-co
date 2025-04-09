@@ -1,0 +1,289 @@
+[
+    {
+        "title": "Monster Slugger",
+        "tagline": "Get into the swing of things!",
+        "unlockLevel": "1",
+        "unlockPlace": "Unlocked from the start.",
+        "rarity": "Common",
+        "mainAttack": {
+            "description": "Swing your Bat to deal area damage in front of you at close range.",
+            "damage": 63,
+            "hitSpeed": "0.5s",
+            "firstHit": "0.15s",
+            "range": "2m",
+            "spread": "75°"
+        },
+        "combo": {
+            "description": "Every 4th attack is a BIG swing that does damage over a larger area and Slows all non-boss monsters.",
+            "chargeTime": 3,
+            "damage": 126,
+            "range": "3.5m",
+            "spread": "100°",
+            "projectiles": 7
+        },
+        "strategy": "This will be updated soon."
+    },
+    {
+        "title": "Techno Fists",
+        "tagline": "Fire bouncing balls of destruction!",
+        "unlockLevel": "2",
+        "unlockPlace": "Protecting 2 Shrine Dancers.",
+        "rarity": "Common",
+        "mainAttack": {
+            "description": "Fling Energy Balls at long range that deal damage and bounce 2 times between enemies, Stunning small monsters.",
+            "damage": "30/15",
+            "hitSpeed": "0.4s",
+            "firstHit": "0.1s",
+            "range": "5m"
+        },
+        "combo": {
+            "description": "Every 14th attack flings a MEGA Ball that deals more damage and has 10 bounces, Stunning all non-boss monsters.",
+            "chargeTime": 14,
+            "damage": "90/45",
+            "range": "6m"
+        },
+        "strategy": "This will be updated soon."
+    },
+    {
+        "title": "Wolf Stick",
+        "tagline": "There's a wolf in the stick! Chaos energy is wild.",
+        "unlockLevel": "8",
+        "unlockPlace": "Complete a project.",
+        "rarity": "Epic",
+        "mainAttack": {
+            "description": "Shoot to damage single enemies at long range.",
+            "damage": "21",
+            "hitSpeed": "0.5s",
+            "firstHit": "0.1s",
+            "range": "5m",
+            "projectiles": "3",
+            "spread": "20°"
+        },
+        "combo": {
+            "description": "Your 6th attack summons a big blue wolf to fight alongside you.",
+            "chargeTime": 18,
+            "range": "1m",
+            "wolf": {
+                "health": 1500,
+                "mainAttack": {
+                    "damage": "21",
+                    "hitSpeed": "0.8s",
+                    "firstHit": "0.3s",
+                    "range": "2m",
+                    "spread": "120°"
+                },
+                "comboAttack": {
+                    "chargeTime": 5,
+                    "damage": 63,
+                    "range": "3.5m"
+                }
+            }
+        },
+        "strategy": "This will be updated soon."
+    },
+    {
+        "title": "Staff of Good Vibes",
+        "tagline": "Everybody loves a healer!",
+        "unlockLevel": "9",
+        "unlockPlace": "Defeating Bone Smasher.",
+        "rarity": "Epic",
+        "mainAttack": {
+            "description": "Shoot your Staff to heal friendly targets and damage enemies in front of you at long range.",
+            "damage": 36,
+            "healing": 36,
+            "hitSpeed": "0.8s",
+            "firstHit": "0.15s",
+            "range": "5m",
+            "projectiles": 3,
+            "spread": "24°"
+        },
+        "combo": {
+            "description": "Every 10th attack is a 360 degree attack that heals more and deals more damage.",
+            "chargeTime": 9,
+            "damage": 180,
+            "healing": 180,
+            "range": "5m",
+            "spread": "360°",
+            "projectiles": 30
+        },
+        "strategy": "This will be updated soon."
+    },
+    {
+        "title": "Toothpick & Shield",
+        "tagline": "Tank the damage! And keep your teeth clean...!",
+        "unlockLevel": "12",
+        "unlockPlace": "Defeating Overlord.",
+        "rarity": "Epic",
+        "mainAttack": {
+            "description": "Poke your Pick to deal area damage in front of you at close range.",
+            "damage": 20,
+            "hitSpeed": "0.4s",
+            "firstHit": "0.075s",
+            "range": "2.7m"
+        },
+        "combo": {
+            "description": "After you recieve 15 hits from enemies, your next attack is an area slam that deals damage in a large area around you and Stuns non-boss monsters",
+            "chargeTime": 20,
+            "damage": 100,
+            "range": "3.5m",
+            "spread": "360°"
+        },
+        "strategy": "This will be updated soon."
+    },
+    {
+        "title": "Portable Portal",
+        "tagline": "Pocket friendly portal tech!",
+        "unlockLevel": "15",
+        "unlockPlace": "Levelling up.",
+        "rarity": "Epic",
+        "mainAttack": {
+            "description": "Shoots a Squiggle that does area damage at long range.",
+            "damage": 10,
+            "hitSpeed": "0.6s",
+            "firstHit": "0s",
+            "range": "5m",
+            "radius": "1.5m"
+        },
+        "combo": {
+            "description": "Fill the combo bar to activate your rightmost Gadget for free. ",
+            "chargeTime": "(Seconds of the rightmost gadget's cooldown * 1.1)"
+        },
+        "strategy": "This will be updated soon."
+    },
+    {
+        "title": "CPU Bomb",
+        "tagline": "Overclocked to explode!",
+        "unlockLevel": "16",
+        "unlockPlace": "Hunting Lady Bug.",
+        "rarity": "Epic",
+        "mainAttack": {
+            "description": "Lob overclocked CPUs that deal area damage at long range.",
+            "damage": 40,
+            "hitSpeed": "0.8s",
+            "firstHit": "0.1s",
+            "range": "5m",
+            "radius": "2m"
+        },
+        "combo": {
+            "description": "Every 8th attack is a MEGA BOMB that explodes after a short delay,",
+            "chargeTime": 7,
+            "damage": 180,
+            "range": "5m",
+            "radius": "3m"
+        },
+        "strategy": "This will be updated soon."
+    },
+    {
+        "title": "Speedshot",
+        "tagline": "Single and ready to mangle!",
+        "unlockLevel": "17",
+        "unlockPlace": "#bigcitylife",
+        "rarity": "Common",
+        "mainAttack": {
+            "description": "Shoot arrows that damage a single enemy.",
+            "damage": 42,
+            "hitSpeed": "0.5s",
+            "firstHit": "0.2s",
+            "range": "5m"
+        },
+        "combo": {
+            "description": "After 10 attacks, enter SPEED mode, shooting really fast.",
+            "chargeTime": 10,
+            "hitSpeed": "0.25s"
+        },
+        "strategy": "This will be updated soon."
+    },
+    {
+        "title": "Medicine ball",
+        "tagline": "The secret to good health!",
+        "unlockLevel": "23",
+        "unlockPlace": "Levelling up.",
+        "rarity": "Common",
+        "mainAttack": {
+            "description": "Swing your ball to deal area damage in front of you at close range.",
+            "damage": 40,
+            "hitSpeed": "0.7s",
+            "firstHit": "0.25s",
+            "range": "2.7m",
+            "spread": "50°"
+        },
+        "combo": {
+            "description": "Every 3rd attack also heals you and all nearby friendlies in a big area all around you.",
+            "chargeTime": 2,
+            "damage": 80,
+            "healing": 120,
+            "range": "2.7m",
+            "spread": "50°",
+            "radius": "4m"
+        },
+        "strategy": "This will be updated soon."
+    },
+    {
+        "title": "Squid Blades",
+        "tagline": "Hidden and Dangerous!",
+        "unlockLevel": "25",
+        "unlockPlace": "#smelly",
+        "rarity": "Common",
+        "mainAttack": {
+            "description": "Repeatedly stab a single enemy at close range with high attack speed.",
+            "damage": "38/570",
+            "hitSpeed": "0.25s",
+            "firstHit": "0.1s",
+            "range": "2m",
+            "spread": "90°"
+        },
+        "combo": {
+            "description": "Stop attacking and using Gadgets to fill up the Invisibility bar. When filled, you turn invisible to enemies. (When invisible, your next attack dashes towards the closest enemy dealing massive damage, Stunning non-boss monsters.)",
+            "chargeTime": "3s without hits",
+            "range": "7m Dash, 2m hit"
+        },
+        "strategy": "This will be updated soon."
+    },
+    {
+        "title": "Spinsickle",
+        "tagline": "Spin it to win it!",
+        "unlockLevel": "29",
+        "unlockPlace": "Levelling up.",
+        "rarity": "Common",
+        "mainAttack": {
+            "description": "Swing to deal area damage in front of you at close range.",
+            "damage": 63,
+            "hitSpeed": "0.5s",
+            "firstHit": "0.15s",
+            "range": "2m",
+            "spread": "75°"
+        },
+        "combo": {
+            "description": "After 6 attacks, enter SPIN mode, where you can pass through enemies, you gain a 20% chance to avoid any enemy attacks and you attack faster and deal area damage all around you.",
+            "chargeTime": 6,
+            "damage": 120,
+            "spread": "360°"
+        },
+        "strategy": "This will be updated soon."
+    },
+    {
+        "title": "Buzz Kill",
+        "tagline": "To bee or not to bee.",
+        "unlockLevel": "E20+",
+        "unlockPlace": "completing #chaos-extreme",
+        "rarity": "Common",
+        "mainAttack": {
+            "description": "Swing to deal area damage in front of you at close range",
+            "damage": 80,
+            "hitSpeed": "0.7s",
+            "firstHit": "0.2s",
+            "range": "2m",
+            "spread": "75°"
+        },
+        "bee": {
+            "description": "Every 4th attack, you summon a bee to fight alongside you. Can have 3 bees, they attack a single target from a long range.",
+            "chargeTime": 4,
+            "damage": 40,
+            "hitSpeed":"0.8s",
+            "firstHit":"0.3s",
+            "range": "5m",
+            "projectiles": 1
+        },
+        "strategy": "This will be updated soon."
+    }
+]

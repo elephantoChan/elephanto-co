@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wiki Search</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+    <div class="container">
+        <aside id="sidebar" class="sidebar">
+            <div class="filter-box">
+                <label><input type="radio" name="filter" value="weapons" checked /> Weapons</label>
+                <label><input type="radio" name="filter" value="gadgets" /> Gadgets</label>
+                <label><input type="radio" name="filter" value="passives" /> Passives</label>
+                <label><input type="radio" name="filter" value="rings" /> Rings</label>
+                <label><input type="radio" name="filter" value="elite-modules" /> Elite Modules</label>
+                <label><input type="radio" name="filter" value="monsters" /> Monsters</label>
+                <label><input type="radio" name="filter" value="worlds" /> Worlds</label>
+                <label><input type="radio" name="filter" value="rifts" /> Rifts</label>
+                <label><input type="radio" name="filter" value="dojos" /> Dojos</label>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="search-box">
+                <button id="toggle-filters">☰ Filters</button>
+                <input type="text" id="search" placeholder="Search" />
+            </div>
+
+            <div id="results" class="results">
+                <!-- Search results will go here -->
+            </div>
+        </main>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+<footer class="footer">
+    This content is not affiliated with, endorsed, sponsored, or specifically approved by Supercell and Supercell is not
+    responsible for it.
+    For more information see <a href="https://www.supercell.com/fan-content-policy" target="_blank"
+        rel="noopener">Supercell's Fan Content Policy</a>.
+</footer>
+
+</html>

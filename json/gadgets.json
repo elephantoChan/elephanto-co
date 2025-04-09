@@ -1,0 +1,24 @@
+[
+    {
+        "title": "Dash",
+        "tagline": "N/A",
+        "rarity": "Common",
+        "unlockLevel": 0,
+        "unlockPlace": "Unlocked from the start",
+        "cooldown": "6s",
+        "range": "2.5m",
+        "use": "Blast yourself forward, dealing damage to all enemies you pass through. Pant ripping may occur."
+    },
+    {
+        "title": "Splash Heal",
+        "tagline": "Stay hydrated!",
+        "rarity": "Common",
+        "unlockLevel": 0,
+        "unlockPlace": "Unlocked from the start",
+        "cooldown": "16s",
+        "healing": 450,
+        "radius": "4m",
+        "range": "2.5m",
+        "use": "Use to sploosh yourself, instantly healing you and nearby friendly targets in a large area around you."
+    }
+]
