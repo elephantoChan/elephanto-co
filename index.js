@@ -19,7 +19,9 @@ input.addEventListener("input", loadDataAndSearch);
 toggleButton.addEventListener("click", () => {
     sidebar.classList.toggle("show");
 });
-
+document.getElementById("darkToggle").addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+});
 async function loadDataAndSearch() {
     const query = input.value.trim().toLowerCase();
     if (query === "") {
@@ -58,13 +60,14 @@ async function loadDataAndSearch() {
         results.innerHTML = `<p>No results found for "<strong>${query}</strong>"</p>`;
         return;
     }
-
     results.innerHTML = matches
         .map(
             (entry, index) => `
     <div class="result-item" data-index="${index}">
-      <p class="result-title"><strong>${index + 1}.</strong> ${entry.title}</p>
-      <div class="result-details hidden"></div>
+        <p class="result-title"><strong>${index + 1}.</strong> ${
+                entry.title
+            }</p>
+        <div class="result-details hidden"></div>
     </div>
   `
         )
@@ -150,7 +153,7 @@ async function loadDataAndSearch() {
             html += `<h3>Main Attack</h3><p>${entry.mainAttack.description}</p>`;
             for (const [key, value] of Object.entries(entry.mainAttack)) {
                 if (key !== "description")
-                    html += `<p><strong>${formatKey(
+                    html += `<p style="text-indent: 1em"><strong>${formatKey(
                         key
                     )}:</strong> ${value}</p>`;
             }
@@ -159,10 +162,27 @@ async function loadDataAndSearch() {
         if (entry.combo) {
             html += `<h3>Combo</h3><p>${entry.combo.description}</p>`;
             for (const [key, value] of Object.entries(entry.combo)) {
-                if (key !== "description")
-                    html += `<p><strong>${formatKey(
+                if (key !== "description" && key !== "wolf")
+                    html += `<p style="text-indent: 1em"><strong>${formatKey(
                         key
                     )}:</strong> ${value}</p>`;
+                // Wolf stick
+                if (key === "wolf") {
+                    html += `<h2>Wolf</h2>
+                             <p><strong>Health</strong>: ${value.health}</p>
+                             <div style="text-indent: 1em;">
+                                <h3>Wolf Main Attack</h3>
+                                <p style="text-indent: 4em;"><strong>Damage</strong>: ${value.mainAttack.damage}</p>
+                                <p style="text-indent: 4em;"><strong>Hit Speed</strong>: ${value.mainAttack.hitSpeed}</p>
+                                <p style="text-indent: 4em;"><strong>First Hit</strong>: ${value.mainAttack.firstHit}</p>
+                                <p style="text-indent: 4em;"><strong>Range</strong>: ${value.mainAttack.range}</p>
+                                <p style="text-indent: 4em;"><strong>Spread</strong>: ${value.mainAttack.spread}</p>
+                                <h3>Wolf Combo Attack</h3>
+                                <p style="text-indent: 4em;"><strong>Damage</strong>: ${value.comboAttack.damage}</p>
+                                <p style="text-indent: 4em;"><strong>Charge Time</strong>: ${value.comboAttack.chargeTime}</p>
+                                <p style="text-indent: 4em;"><strong>Range</strong>: ${value.comboAttack.range}</p>
+                             </div>`;
+                }
             }
         }
 
