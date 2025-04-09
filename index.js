@@ -3,6 +3,7 @@ const results = document.getElementById("results");
 const filters = document.querySelectorAll('input[name="filter"]');
 const sidebar = document.getElementById("sidebar");
 const toggleButton = document.getElementById("toggle-filters");
+const footerBar = document.getElementById("footer");
 
 let currentFilter = "weapons";
 let dataCache = {};
@@ -22,6 +23,12 @@ toggleButton.addEventListener("click", () => {
 document.getElementById("darkToggle").addEventListener("click", () => {
     document.body.classList.toggle("dark");
 });
+
+footerBar.addEventListener("click", () => {
+    console.log("footer removed");
+    footerBar.remove();
+});
+
 async function loadDataAndSearch() {
     const query = input.value.trim().toLowerCase();
     if (query === "") {

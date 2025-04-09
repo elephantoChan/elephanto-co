@@ -11,10 +11,11 @@
 
 <body>
     <div class="top-bar">
+        <p style="justify-content: left;">Elephanto's Mo.co Guides</p>
         <div class="top-links">
             <a href="https://www.discord.com/invite/moco" target="_blank" class="top-btn">Discord</a>
+            <button id="darkToggle" class="top-btn">Toggle Dark Mode</button>
         </div>
-        <button id="darkToggle" class="top-btn">Toggle Dark Mode</button>
     </div>
     <div class="container">
         <aside id="sidebar" class="sidebar">
@@ -34,8 +35,8 @@
         <main class="main-content">
             <img src="assets/Major Icon.png" alt="Mo.co Icon" class="moco-icon" style="width:540px">
             <div class="search-box">
-                <button id="toggle-filters">☰ Filters</button>
                 <input type="text" id="search" placeholder="Search" />
+                <button id="toggle-filters">☰ Filters</button>
             </div>
 
             <div id="results" class="results hidden">
@@ -43,14 +44,14 @@
             </div>
         </main>
     </div>
-
+    <footer class="footer" id="footer">
+        This content is not affiliated with, endorsed, sponsored, or specifically approved by Supercell and Supercell is
+        not
+        responsible for it.
+        For more information see Supercell's Fan Content Policy.
+    </footer>
     <script src="index.js"></script>
 </body>
-<footer class="footer">
-    This content is not affiliated with, endorsed, sponsored, or specifically approved by Supercell and Supercell is not
-    responsible for it.
-    For more information see <a href="https://www.supercell.com/fan-content-policy" target="_blank"
-        rel="noopener">Supercell's Fan Content Policy</a>.
-</footer>
+
 
 </html>
