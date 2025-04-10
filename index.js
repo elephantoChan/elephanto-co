@@ -57,7 +57,6 @@ async function loadDataAndSearch() {
         const title = entry.title.toLowerCase();
         const words = title.split(/\s+/);
         const initials = words.map((w) => w[0]).join("");
-
         return (
             title.includes(query) ||
             initials.includes(query.replace(/\s+/g, ""))
@@ -72,9 +71,8 @@ async function loadDataAndSearch() {
         .map(
             (entry, index) => `
     <div class="result-item" data-index="${index}">
-        <p class="result-title"><strong>${index + 1}.</strong> ${
-                entry.title
-            }</p>
+        <p class="result-title"><strong>${index + 1}.</strong> ${entry.title}
+        </p>
         <div class="result-details hidden"></div>
     </div>
   `

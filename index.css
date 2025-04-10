@@ -2,7 +2,7 @@ html, body {
     height: 100%;
     margin: 0;
     font-family: 'SF Pro', 'Helvetica', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background:#f9f9f9;
+    background:linear-gradient(to bottom, #f9f9f9, #9958f5);
     overflow-x:hidden;
     overflow-y:hidden;
 }
@@ -204,7 +204,7 @@ html, body {
     background: #ddd;
 }
 body.dark {
-    background: #121212;
+    background: linear-gradient(to bottom, #121212, #0e0022);
     color: #eee;
 }
 body.dark .top-bar {
@@ -219,17 +219,19 @@ body.dark .top-btn:hover {
     background: #444;
 }
 body.dark .footer {
-    background: #1e1e1e;
+    background: #0e0022;
     color: #aaa;
     border-top: 1px solid #333;
 }
 body.dark .sidebar {
+    border-right: 1px solid #333;
     color: white;
-    background: #121212;
+    background: #1e1e1e;
 }
 body.dark .search-box input {
-    border: 1px solid #2a2a2a;
+    border: 1px solid #333;
     background: #2a2a2a;
+    color:#ddd;
 }
 body.dark .search-box input::placeholder {
     color:#ccc
