@@ -7,7 +7,6 @@ const footerBar = document.getElementById("footer");
 
 let currentFilter = "weapons";
 let dataCache = {};
-document.body.classList.toggle("dark");
 filters.forEach((radio) => {
     radio.addEventListener("change", () => {
         currentFilter = radio.value;
@@ -16,19 +15,12 @@ filters.forEach((radio) => {
 });
 
 input.addEventListener("input", loadDataAndSearch);
-
 toggleButton.addEventListener("click", () => {
     sidebar.classList.toggle("show");
 });
-document.getElementById("darkToggle").addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-});
-
 footerBar.addEventListener("click", () => {
-    console.log("footer removed");
     footerBar.remove();
 });
-
 async function loadDataAndSearch() {
     const query = input.value.trim().toLowerCase();
     if (query === "") {
