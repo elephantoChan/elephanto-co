@@ -1,193 +1,98 @@
-const input = document.getElementById("search");
-const results = document.getElementById("results");
 const filters = document.querySelectorAll('input[name="filter"]');
+const filterButton = document.getElementById("toggle-filters");
+const searchBox = document.getElementById("search");
 const sidebar = document.getElementById("sidebar");
-const toggleButton = document.getElementById("toggle-filters");
-const footerBar = document.getElementById("footer");
-
-let currentFilter = "weapons";
-let dataCache = {};
-filters.forEach((radio) => {
-    radio.addEventListener("change", () => {
-        currentFilter = radio.value;
-        loadDataAndSearch();
-    });
-});
-
-input.addEventListener("input", loadDataAndSearch);
-toggleButton.addEventListener("click", () => {
+const footer = document.getElementById("footer");
+const resultsBox = document.getElementById("results");
+const icon = document.getElementById("icon");
+const mainContent = document.getElementById("main");
+// Filters button, footer
+filterButton.addEventListener("click", () => {
     sidebar.classList.toggle("show");
 });
-footerBar.addEventListener("click", () => {
-    footerBar.remove();
+footer.addEventListener("click", () => {
+    footer.remove();
 });
-async function loadDataAndSearch() {
-    const query = input.value.trim().toLowerCase();
-    if (query === "") {
-        results.innerHTML = "";
-        results.classList.add("hidden");
+let debounceTimeout;
+searchBox.addEventListener("input", () => {
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(handleSearch, 600);
+});
+function getSelectedFilter() {
+    const selected = [...filters].find((f) => f.checked);
+    return selected ? selected.value : null;
+}
+
+function showResults(matches) {
+    if (!matches.length) {
+        resultsBox.classList.add("hidden");
+        resultsBox.innerHTML = "";
+
+        // Reset styles
+        mainContent.classList.remove("shift-up");
+        icon.classList.remove("shrink");
         return;
     }
-    results.classList.remove("hidden");
-    const file = `json/${currentFilter}.json`;
 
-    if (!dataCache[currentFilter]) {
-        try {
-            const res = await fetch(file);
-            if (!res.ok) throw new Error(`Could not load ${file}`);
-            const json = await res.json();
-            dataCache[currentFilter] = json;
-        } catch (err) {
-            results.classList.remove("hidden");
-            results.innerHTML = `<p>Error loading data: ${err.message}</p>`;
-            return;
-        }
-    }
-
-    const entries = dataCache[currentFilter];
-    const matches = entries.filter((entry) => {
-        const title = entry.title.toLowerCase();
-        const words = title.split(/\s+/);
-        const initials = words.map((w) => w[0]).join("");
-        return (
-            title.includes(query) ||
-            initials.includes(query.replace(/\s+/g, ""))
-        );
-    });
-
-    if (matches.length === 0) {
-        results.innerHTML = `<p>No results found for "<strong>${query}</strong>"</p>`;
-        return;
-    }
-    results.innerHTML = matches
+    resultsBox.classList.remove("hidden");
+    resultsBox.innerHTML = matches
         .map(
-            (entry, index) => `
-    <div class="result-item" data-index="${index}">
-        <p class="result-title"><strong>${index + 1}.</strong> ${entry.title}
-        </p>
-        <div class="result-details hidden"></div>
-    </div>
-  `
+            ({ name, file }) =>
+                `<div class="result-item" data-file="${file}">${name}</div>`
         )
         .join("");
 
-    // Add click handlers
+    // Apply styles
+    mainContent.classList.add("shift-up");
+    icon.classList.add("shrink");
+
     document.querySelectorAll(".result-item").forEach((item) => {
         item.addEventListener("click", () => {
-            const index = parseInt(item.dataset.index, 10);
-            const detailsDiv = item.querySelector(".result-details");
-            const isOpen = !detailsDiv.classList.contains("hidden");
-
-            if (isOpen) {
-                detailsDiv.classList.add("hidden");
-                detailsDiv.innerHTML = "";
-            } else {
-                detailsDiv.innerHTML = formatDetails(matches[index]);
-                detailsDiv.classList.remove("hidden");
-            }
+            const file = item.getAttribute("data-file");
+            window.location.href = file;
         });
     });
+}
 
-    // Auto-expand if only one
-    if (matches.length === 1) {
-        const item = document.querySelector(".result-item");
-        const detailsDiv = item.querySelector(".result-details");
-        detailsDiv.innerHTML = formatDetails(matches[0]);
-        detailsDiv.classList.remove("hidden");
-    }
-    function formatDetails(entry) {
-        const imagePath = `assets/${currentFilter}/${encodeURIComponent(
-            entry.title
-        )}.png`;
+async function handleSearch() {
+    const query = searchBox.value.trim().toLowerCase();
+    if (!query) return showResults([]);
 
-        let html = `
-    <div class="entry-header">
-      <img src="${imagePath}" alt="${entry.title}" class="entry-image">
-      <div class="entry-info">
-        ${entry.tagline ? `<p class="tagline">"${entry.tagline}"</p>` : ""}
-        ${
-            entry.unlockLevel
-                ? `<p><strong>Unlock Level:</strong> ${entry.unlockLevel}</p>`
-                : ""
-        }
-        ${
-            entry.unlockPlace
-                ? `<p><strong>Unlock Place:</strong> ${entry.unlockPlace}</p>`
-                : ""
-        }
-        ${entry.rarity ? `<p><strong>Rarity:</strong> ${entry.rarity}</p>` : ""}
-      </div>
-    </div>
-  `;
+    const filter = getSelectedFilter();
+    if (!filter) return showResults([]);
 
-        switch (currentFilter) {
-            case "weapons":
-                html += renderWeapon(entry);
-                break;
+    try {
+        const res = await fetch("wiki/pages.json");
+        const data = await res.json();
+        const category = data[filter];
+        if (!category) return showResults([]);
 
-            case "gadgets":
-                html += renderGadget(entry);
-                break;
+        const matches = [];
 
-            case "characters":
-                html += renderCharacter(entry);
-                break;
+        for (const key in category) {
+            const keyLower = key.toLowerCase();
 
-            default:
-                html += `<pre>${JSON.stringify(entry, null, 2)}</pre>`;
-        }
+            // Match 1: Includes query
+            const includesMatch = keyLower.includes(query);
 
-        return html;
-    }
-    function formatKey(key) {
-        return key
-            .replace(/([A-Z])/g, " $1")
-            .replace(/^./, (s) => s.toUpperCase());
-    }
+            // Match 2: Initials match
+            const initials = key
+                .split(/\s+/)
+                .map((word) => word[0]?.toLowerCase())
+                .join("");
+            const initialsMatch = initials === query;
 
-    function renderWeapon(entry) {
-        let html = "";
-        if (entry.mainAttack) {
-            html += `<h3>Main Attack</h3><p>${entry.mainAttack.description}</p>`;
-            for (const [key, value] of Object.entries(entry.mainAttack)) {
-                if (key !== "description")
-                    html += `<p style="text-indent: 1em"><strong>${formatKey(
-                        key
-                    )}:</strong> ${value}</p>`;
+            if (includesMatch || initialsMatch) {
+                matches.push({
+                    name: key,
+                    file: `wiki/${filter}/${category[key]}`,
+                });
             }
         }
 
-        if (entry.combo) {
-            html += `<h3>Combo</h3><p>${entry.combo.description}</p>`;
-            for (const [key, value] of Object.entries(entry.combo)) {
-                if (key !== "description" && key !== "wolf")
-                    html += `<p style="text-indent: 1em"><strong>${formatKey(
-                        key
-                    )}:</strong> ${value}</p>`;
-                // Wolf stick
-                if (key === "wolf") {
-                    html += `<h2>Wolf</h2>
-                             <p><strong>Health</strong>: ${value.health}</p>
-                             <div style="text-indent: 1em;">
-                                <h3>Wolf Main Attack</h3>
-                                <p style="text-indent: 4em;"><strong>Damage</strong>: ${value.mainAttack.damage}</p>
-                                <p style="text-indent: 4em;"><strong>Hit Speed</strong>: ${value.mainAttack.hitSpeed}</p>
-                                <p style="text-indent: 4em;"><strong>First Hit</strong>: ${value.mainAttack.firstHit}</p>
-                                <p style="text-indent: 4em;"><strong>Range</strong>: ${value.mainAttack.range}</p>
-                                <p style="text-indent: 4em;"><strong>Spread</strong>: ${value.mainAttack.spread}</p>
-                                <h3>Wolf Combo Attack</h3>
-                                <p style="text-indent: 4em;"><strong>Damage</strong>: ${value.comboAttack.damage}</p>
-                                <p style="text-indent: 4em;"><strong>Charge Time</strong>: ${value.comboAttack.chargeTime}</p>
-                                <p style="text-indent: 4em;"><strong>Range</strong>: ${value.comboAttack.range}</p>
-                             </div>`;
-                }
-            }
-        }
-
-        if (entry.strategy) {
-            html += `<h2>Strategy</h2><p>${entry.strategy}</p>`;
-        }
-
-        return html;
+        showResults(matches);
+    } catch (err) {
+        console.error("Error loading or processing search:", err);
+        showResults([]);
     }
 }
