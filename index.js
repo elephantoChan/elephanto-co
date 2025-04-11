@@ -6,6 +6,8 @@ const footer = document.getElementById("footer");
 const resultsBox = document.getElementById("results");
 const icon = document.getElementById("icon");
 const mainContent = document.getElementById("main");
+const panel = document.getElementById("slidePanel");
+
 // Filters button, footer
 filterButton.addEventListener("click", () => {
     sidebar.classList.toggle("show");
@@ -16,7 +18,7 @@ footer.addEventListener("click", () => {
 let debounceTimeout;
 searchBox.addEventListener("input", () => {
     clearTimeout(debounceTimeout);
-    debounceTimeout = setTimeout(handleSearch, 600);
+    debounceTimeout = setTimeout(handleSearch, 400);
 });
 function getSelectedFilter() {
     const selected = [...filters].find((f) => f.checked);
@@ -42,14 +44,15 @@ function showResults(matches) {
         )
         .join("");
 
-    // Apply styles
-    mainContent.classList.add("shift-up");
-    icon.classList.add("shrink");
-
     document.querySelectorAll(".result-item").forEach((item) => {
-        item.addEventListener("click", () => {
+        item.addEventListener("click", async () => {
             const file = item.getAttribute("data-file");
-            window.location.href = file;
+            const response = await fetch(file);
+            const data = await response.text();
+            panel.innerHTML = data;
+            panel.classList.toggle("active");
+            console.log("click!");
+            //     window.location.href = file;
         });
     });
 }
