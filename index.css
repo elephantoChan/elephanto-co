@@ -218,20 +218,52 @@ html, body {
 .top-btn:hover {
     background: #444;
 }
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    /* not clickable until active */
+    background: transparent;
+    z-index: 9998;
+}
+
+.overlay.active {
+    pointer-events: auto;
+    /* make clickable */
+    background: rgba(0, 0, 0, 0.0);
+    /* optional dimmed bg */
+}
+
 .slide-in {
     position: fixed;
     top: 0;
-    right: -70vw;
-    /* start off-screen */
-    width: 70vw;
-    /* cover exactly 70% of screen */
+    right: -80vw;
+    width: 60vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.9);
+    border-left: 1px solid #333;
+    background-color: rgba(14, 0, 34, 0.95);
     color: white;
+    overflow-y: auto;
+    padding: 1rem;
+    transition: right 0.3s ease-in-out;
     z-index: 9999;
-    transition: right 0.5s ease;
 }
 
 .slide-in.active {
     right: 0;
+}
+
+/* wiki */
+.wiki-main-content {
+    display:flex;
+}
+.unlock {
+    padding-left: 5%;
+    border-left: 2px rgb(14, 0, 24)
+}
+.wiki-icon {
+    height: 180px;
 }

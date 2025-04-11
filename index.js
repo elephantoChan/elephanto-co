@@ -7,13 +7,19 @@ const resultsBox = document.getElementById("results");
 const icon = document.getElementById("icon");
 const mainContent = document.getElementById("main");
 const panel = document.getElementById("slidePanel");
-
+const overlay = document.getElementById("overlay");
 // Filters button, footer
 filterButton.addEventListener("click", () => {
     sidebar.classList.toggle("show");
 });
 footer.addEventListener("click", () => {
     footer.remove();
+});
+overlay.addEventListener("click", (e) => {
+    if (!panel.contains(e.target)) {
+        overlay.classList.remove("active");
+        panel.classList.remove("active");
+    }
 });
 let debounceTimeout;
 searchBox.addEventListener("input", () => {
@@ -51,8 +57,8 @@ function showResults(matches) {
             const data = await response.text();
             panel.innerHTML = data;
             panel.classList.toggle("active");
+            overlay.classList.add("active");
             console.log("click!");
-            //     window.location.href = file;
         });
     });
 }
